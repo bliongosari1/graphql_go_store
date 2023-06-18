@@ -8,7 +8,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/bliongosari1/gqlgen-todos/graph/model"
+	"github.com/bliongosari/graphql_go_store/graph/model"
 )
 
 // CreateTodo is the resolver for the createTodo field.
@@ -18,14 +18,14 @@ func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) 
 
 // Todos is the resolver for the todos field.
 func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {
-	var todos []*model.Todo
+	var links []*model.Todo
 	dummyLink := model.Todo{
-		Text: "ededde",
-		Done: true,
-		User: &model.User{Name: "admin"},
+		ID:   "1",
+		Text: "test",
+	  	User: &model.User{Name: "admin"},
 	}
-	todos = append(todos, &dummyLink)
-	return todos, nil
+	  links = append(links, &dummyLink)
+	  return links, nil
 }
 
 // Mutation returns MutationResolver implementation.

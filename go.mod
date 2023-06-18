@@ -1,4 +1,4 @@
-module github.com/bliongosari1/gqlgen-todos
+module github.com/bliongosari/graphql_go_store
 
 go 1.20
 

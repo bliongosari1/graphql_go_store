@@ -1,1 +1,0 @@
-# graphql_go_store
