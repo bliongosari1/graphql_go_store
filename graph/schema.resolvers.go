@@ -11,21 +11,44 @@ import (
 	"github.com/bliongosari/graphql_go_store/graph/model"
 )
 
-// CreateTodo is the resolver for the createTodo field.
-func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) (*model.Todo, error) {
-	panic(fmt.Errorf("not implemented: CreateTodo - createTodo"))
+// CreateImagePost is the resolver for the createImagePost field.
+func (r *mutationResolver) CreateImagePost(ctx context.Context, title string, authorID string, imageURL string) (*model.ImagePost, error) {
+	panic(fmt.Errorf("not implemented: CreateImagePost - createImagePost"))
 }
 
-// Todos is the resolver for the todos field.
-func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {
-	var links []*model.Todo
-	dummyLink := model.Todo{
-		ID:   "1",
-		Text: "test",
-	  	User: &model.User{Name: "admin"},
-	}
-	  links = append(links, &dummyLink)
-	  return links, nil
+// CreateTextPost is the resolver for the createTextPost field.
+func (r *mutationResolver) CreateTextPost(ctx context.Context, title string, authorID string, content string) (*model.TextPost, error) {
+	panic(fmt.Errorf("not implemented: CreateTextPost - createTextPost"))
+}
+
+// CreateUser is the resolver for the createUser field.
+func (r *mutationResolver) CreateUser(ctx context.Context, name string, email string) (*model.User, error) {
+	panic(fmt.Errorf("not implemented: CreateUser - createUser"))
+}
+
+// CreateComment is the resolver for the createComment field.
+func (r *mutationResolver) CreateComment(ctx context.Context, content string, authorID string, postID string) (*model.Comment, error) {
+	panic(fmt.Errorf("not implemented: CreateComment - createComment"))
+}
+
+// GetPost is the resolver for the getPost field.
+func (r *queryResolver) GetPost(ctx context.Context, id string) (model.Post, error) {
+	panic(fmt.Errorf("not implemented: GetPost - getPost"))
+}
+
+// GetUser is the resolver for the getUser field.
+func (r *queryResolver) GetUser(ctx context.Context, id string) (*model.User, error) {
+	panic(fmt.Errorf("not implemented: GetUser - getUser"))
+}
+
+// GetAllPosts is the resolver for the getAllPosts field.
+func (r *queryResolver) GetAllPosts(ctx context.Context) ([]model.Post, error) {
+	panic(fmt.Errorf("not implemented: GetAllPosts - getAllPosts"))
+}
+
+// GetAllUsers is the resolver for the getAllUsers field.
+func (r *queryResolver) GetAllUsers(ctx context.Context) ([]*model.User, error) {
+	panic(fmt.Errorf("not implemented: GetAllUsers - getAllUsers"))
 }
 
 // Mutation returns MutationResolver implementation.

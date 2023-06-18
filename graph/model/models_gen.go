@@ -2,19 +2,70 @@
 
 package model
 
-type NewTodo struct {
-	Text   string `json:"text"`
-	UserID string `json:"userId"`
+type Post interface {
+	IsPost()
+	GetID() string
+	GetTitle() string
+	GetAuthor() *User
+	GetComments() []*Comment
 }
 
-type Todo struct {
-	ID   string `json:"id"`
-	Text string `json:"text"`
-	Done bool   `json:"done"`
-	User *User  `json:"user"`
+type Comment struct {
+	ID      string `json:"id"`
+	Content string `json:"content"`
+	Author  *User  `json:"author"`
+	Post    Post   `json:"post"`
+}
+
+type ImagePost struct {
+	ID       string     `json:"id"`
+	Title    string     `json:"title"`
+	Author   *User      `json:"author"`
+	Comments []*Comment `json:"comments"`
+	ImageURL string     `json:"imageUrl"`
+}
+
+func (ImagePost) IsPost()               {}
+func (this ImagePost) GetID() string    { return this.ID }
+func (this ImagePost) GetTitle() string { return this.Title }
+func (this ImagePost) GetAuthor() *User { return this.Author }
+func (this ImagePost) GetComments() []*Comment {
+	if this.Comments == nil {
+		return nil
+	}
+	interfaceSlice := make([]*Comment, 0, len(this.Comments))
+	for _, concrete := range this.Comments {
+		interfaceSlice = append(interfaceSlice, concrete)
+	}
+	return interfaceSlice
+}
+
+type TextPost struct {
+	ID       string     `json:"id"`
+	Title    string     `json:"title"`
+	Author   *User      `json:"author"`
+	Comments []*Comment `json:"comments"`
+	Content  string     `json:"content"`
+}
+
+func (TextPost) IsPost()               {}
+func (this TextPost) GetID() string    { return this.ID }
+func (this TextPost) GetTitle() string { return this.Title }
+func (this TextPost) GetAuthor() *User { return this.Author }
+func (this TextPost) GetComments() []*Comment {
+	if this.Comments == nil {
+		return nil
+	}
+	interfaceSlice := make([]*Comment, 0, len(this.Comments))
+	for _, concrete := range this.Comments {
+		interfaceSlice = append(interfaceSlice, concrete)
+	}
+	return interfaceSlice
 }
 
 type User struct {
-	ID   string `json:"id"`
-	Name string `json:"name"`
+	ID    string `json:"id"`
+	Name  string `json:"name"`
+	Email string `json:"email"`
+	Posts []Post `json:"posts"`
 }

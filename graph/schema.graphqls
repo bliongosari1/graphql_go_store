@@ -2,27 +2,53 @@
 #
 # https://gqlgen.com/getting-started/
 
-type Todo {
+interface Post {
   id: ID!
-  text: String!
-  done: Boolean!
-  user: User!
+  title: String!
+  author: User!
+  comments: [Comment!]!
+}
+
+type ImagePost implements Post {
+  id: ID!
+  title: String!
+  author: User!
+  comments: [Comment!]!
+  imageUrl: String!
+}
+
+type TextPost implements Post {
+  id: ID!
+  title: String!
+  author: User!
+  comments: [Comment!]!
+  content: String!
 }
 
 type User {
   id: ID!
   name: String!
+  email: String!
+  posts: [Post!]!
+}
+
+type Comment {
+  id: ID!
+  content: String!
+  author: User!
+  post: Post!
 }
 
 type Query {
-  todos: [Todo!]!
-}
-
-input NewTodo {
-  text: String!
-  userId: String!
+  getPost(id: ID!): Post
+  getUser(id: ID!): User
+  getAllPosts: [Post!]!
+  getAllUsers: [User!]!
 }
 
 type Mutation {
-  createTodo(input: NewTodo!): Todo!
+  createImagePost(title: String!, authorId: ID!, imageUrl: String!): ImagePost
+  createTextPost(title: String!, authorId: ID!, content: String!): TextPost
+  createUser(name: String!, email: String!): User
+  createComment(content: String!, authorId: ID!, postId: ID!): Comment
 }
